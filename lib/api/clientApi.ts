@@ -26,7 +26,7 @@ type CheckSessionRequest = {
 
 type CreateNoteData = Pick<Note, 'title' | 'content' | 'tag'>;
 
-const myKey = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
+
 
 export const fetchNotes = async (
   page: number,
@@ -54,9 +54,7 @@ export const fetchNotes = async (
     '/notes',
     {
       params,
-      headers: {
-        Authorization: `Bearer ${myKey}`,
-      },
+      
     }
   );
 
@@ -66,12 +64,7 @@ export const fetchNotes = async (
 export const createNote = async (note: CreateNoteData): Promise<Note> => {
   const response = await nextServer.post<Note>(
     '/notes',
-    note,
-    {
-      headers: {
-        Authorization: `Bearer ${myKey}`,
-      },
-    }
+    note
   );
 
   return response.data;
@@ -80,11 +73,7 @@ export const createNote = async (note: CreateNoteData): Promise<Note> => {
 export const deleteNote = async (id: Note['id']): Promise<Note> => {
   const response = await nextServer.delete<Note>(
     `/notes/${id}`,
-    {
-      headers: {
-        Authorization: `Bearer ${myKey}`,
-      },
-    }
+    
   );
 
   return response.data;
@@ -93,11 +82,7 @@ export const deleteNote = async (id: Note['id']): Promise<Note> => {
 export const fetchNoteById = async (id: Note['id']): Promise<Note> => {
   const response = await nextServer.get<Note>(
     `/notes/${id}`,
-    {
-      headers: {
-        Authorization: `Bearer ${myKey}`,
-      },
-    }
+    
   );
 
   return response.data;

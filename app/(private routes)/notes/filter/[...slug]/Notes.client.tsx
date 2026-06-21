@@ -8,6 +8,7 @@ import { fetchNotes } from '@/lib/api/clientApi';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
 import NoteList from '@/components/NoteList/NoteList';
+import Link from 'next/link';
 
 
 import css from './NotesPage.module.css';
@@ -49,13 +50,12 @@ export default function NotesClient({ tag }: NotesClientProps) {
           />
         )}
 
-        <button
-          type="button"
-          className={css.button}
-          onClick={() => {router.push('/notes/action/create')}}
+        <Link
+        href="/notes/action/create"
+        className={css.button}
         >
           Create note +
-        </button>
+        </Link>
       </header>
 
       {isFetching && <p className={css.loading}>Loading...</p>}

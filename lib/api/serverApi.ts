@@ -73,15 +73,16 @@ type CheckSessionResponse = {
   success: boolean;
 };
 
+
 export const checkSession = async () => {
-  const cookieStore = await cookies();
+  const cookieHeader = await getCookieHeader();
 
   const response =
     await nextServer.get<CheckSessionResponse>(
       '/auth/session',
       {
         headers: {
-          Cookie: cookieStore.toString(),
+          Cookie: cookieHeader,
         },
       }
     );
@@ -89,12 +90,17 @@ export const checkSession = async () => {
   return response;
 };
 
-export const getMe = async () => {
-  const cookieStore = await cookies();
-  const { data } = await nextServer.get<User>('/users/me', {
-    headers: {
-      Cookie: cookieStore.toString(),
-    },
-  });
-  return data;
+export const getMe = async (): Promise<User> => {
+  const cookieHeader = await getCookieHeader();
+
+  const response = await nextServer.get<User>(
+    '/users/me',
+    {
+      headers: {
+        Cookie: cookieHeader,
+      },
+    }
+  );
+
+  return response.data;
 };

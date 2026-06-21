@@ -1,13 +1,16 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      { protocol: 'https', hostname: 'picsum.photos' },
-      { protocol: 'https', hostname: 'aliiev-lomach.com' },
+      {
+        protocol: 'https',
+        hostname: 'ac.goit.global',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
-  reactCompiler: true,
 };
 
 export default nextConfig;

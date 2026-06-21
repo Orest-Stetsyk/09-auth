@@ -4,9 +4,12 @@ import { useState } from 'react';
 import css from './SignInPage.module.css'
 import { login, LoginRequest } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
-import { ApiError } from '@/app/api/api';
+import type { AxiosError } from 'axios';
 import { useAuthStore } from '@/lib/store/authStore';
 
+type ApiError = AxiosError<{
+  error: string;
+}>;
 
 export default function SignInPage() {
     const router = useRouter();
